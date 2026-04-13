@@ -1,23 +1,346 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+    /* 기본 스타일 재설정 */
+    body { font-family: 'Noto Sans KR', sans-serif; line-height: 1.7; margin: 0; padding: 0; background-color: #f4f7fa; color: #333; }
+    header { background-color: #0060e0; color: #fff; padding: 40px 15px; text-align: center; border-radius: 0 0 15px 15px; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+    header h1 { margin: 0; font-size: 2.5em; font-weight: 700; }
+    header p { margin-top: 10px; font-size: 1.1em; opacity: 0.9; }
+
+    /* 섹션 레이아웃 */
+    section { max-width: 960px; margin: 20px auto; padding: 30px; background-color: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    section h2 { color: #004aad; font-size: 2em; border-bottom: 2px solid #e0eaff; padding-bottom: 10px; margin-bottom: 20px; }
+    section h3 { color: #0060e0; font-size: 1.5em; margin-top: 25px; margin-bottom: 15px; }
+    
+    /* 네비게이션 스타일 */
+    nav { max-width: 960px; margin: 0 auto; background-color: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); padding: 15px 30px; margin-bottom: 20px; }
+    nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: space-around; }
+    nav li { margin: 5px 10px; }
+    nav a { text-decoration: none; color: #333; padding: 8px 15px; display: block; border-radius: 20px; transition: background-color 0.3s, color 0.3s; font-weight: 500; }
+    nav a:hover { background-color: #e0eaff; color: #004aad; }
+
+    /* CTA 버튼 스타일 */
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 30px;
+      background: linear-gradient(to right, #0070f3, #005bb5);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1em;
+      border-radius: 30px;
+      box-shadow: 0 6px 12px rgba(0, 112, 243, 0.3);
+      transition: all 0.3s ease;
+      text-align: center;
+      margin-top: 20px;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-cta:hover {
+      background: linear-gradient(to right, #005bb5, #004aad);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0, 112, 243, 0.4);
+    }
+    .cta-container { text-align: center; margin-top: 30px; }
+
+    /* 테이블 스타일 */
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 15px; text-align: center; border-bottom: 1px solid #eee; }
+    th { background: #e0eaff; color: #004aad; font-weight: 700; border-right: 1px solid #ddd; }
+    td { background: #f9f9f9; border-right: 1px solid #eee; }
+    th:last-child, td:last-child { border-right: none; }
+    tr:last-child td { border-bottom: none; }
+
+    /* 폼 스타일 */
+    form { background-color: #f9f9f9; padding: 25px; border-radius: 12px; border: 1px solid #e0eaff; }
+    label { display: block; font-weight: 600; color: #004aad; margin-top: 15px; margin-bottom: 5px; }
+    input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 1em;
+      background-color: #fff;
+    }
+    textarea { resize: vertical; }
+
+    /* 이미지 스타일 */
+    .img-container { text-align: center; margin: 20px 0; }
+    .img-container img { max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+
+    /* 강조 텍스트 */
+    .highlight { background-color: #e0eaff; color: #004aad; font-weight: 600; padding: 2px 5px; border-radius: 3px; }
+
+    /* 리스트 스타일 */
+    ul { list-style: none; padding-left: 0; }
+    li { position: relative; padding-left: 25px; margin-bottom: 10px; }
+    li::before { content: '✓'; position: absolute; left: 0; color: #0070f3; font-weight: bold; }
+
+    /* 외부 링크 스타일 (신뢰성) */
+    .external-links { margin-top: 30px; padding: 20px; border-top: 1px solid #eee; background-color: #fafafa; border-radius: 8px; }
+    .external-links h3 { font-size: 1.2em; color: #004aad; }
+    .external-links a { display: block; margin-bottom: 5px; color: #0060e0; text-decoration: none; font-weight: 500; }
+    .external-links a:hover { text-decoration: underline; }
+
+    /* 반응형 디자인 */
+    @media (max-width: 768px) {
+      header { padding: 30px 15px; }
+      header h1 { font-size: 2em; }
+      section { margin: 10px auto; padding: 20px; }
+      nav ul { flex-direction: column; }
+      nav li { margin: 5px 0; text-align: center; }
+      table, th, td { font-size: 0.9em; padding: 10px; }
+      .btn-cta { width: 100%; padding: 15px 0; font-size: 1em; }
+      nav a { padding: 10px; }
+    }
+  </style>
+
+  <!-- Schema.org Article MarkUp (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://yourdomain.com/internet-tv-guide"
+    },
+    "headline": "2026년 인터넷 TV 가입 가이드: 통신사별 요금제 및 현금지원 비교 분석",
+    "description": "SKT, KT, LG U+ 3사 통신사의 인터넷 요금제, TV 채널 구성, 사은품 및 현금지원 혜택을 상세하게 비교 분석하는 전문 가이드입니다. 신규 가입 시 혜택을 최대화하는 방법을 안내합니다.",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://images.pexels.com/photos/internet-connection-image.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "width": 1260,
+      "height": 750
+    },
+    "author": {
+      "@type": "Person",
+      "name": "인터넷 가입 전문가"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "가입 혜택 비교센터",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://yourdomain.com/logo.png"
+      }
+    },
+    "datePublished": "2026-04-14",
+    "dateModified": "2026-04-14",
+    "articleSection": [
+      "인터넷 가입 전 필수 체크리스트",
+      "통신사별 요금제 비교 (SKT, KT, LG U+)",
+      "현금지원 및 사은품 혜택 분석",
+      "가입 시 주의사항 및 자주 묻는 질문",
+      "지역별 인터넷 설치 가능 여부"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>2026년 인터넷 티비 가입 가이드: 최대 현금지원 혜택 비교</h1>
+    <p>SKT, KT, LG U+ 통신사별 요금제, 사은품, 가격, 장단점 분석. 전국 최저가 견적을 지금 바로 확인하세요.</p>
+    <div class="cta-container">
+      <button class="btn-cta" onclick="location.href='#contact'">지금 바로 1:1 맞춤 상담 시작하기</button>
+    </div>
+  </header>
+
+  <nav aria-label="페이지 내 이동">
+    <ul>
+      <li><a href="#intro">인터넷 가입 가이드</a></li>
+      <li><a href="#providers">통신사별 비교</a></li>
+      <li><a href="#pricing">요금 및 사은품 분석</a></li>
+      <li><a href="#checklist">필수 체크리스트</a></li>
+      <li><a href="#faq">자주 묻는 질문</a></li>
+      <li><a href="#contact">상담 신청</a></li>
+    </ul>
+  </nav>
+
+  <section id="intro">
+    <span id="intro-anchor" class="anchor"></span>
+    <h2>인터넷티비 신규 가입, 2026년에도 현금지원 혜택을 놓치지 마세요!</h2>
+    <div class="img-container">
+      <img src="https://images.pexels.com/photos/internet-connection-image.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="인터넷 연결 이미지" title="인터넷 가입 가이드">
+    </div>
+    <p>인터넷티비 신규 가입 시 통신사 선택만큼 중요한 것이 바로 <span class="highlight">현금지원 및 사은품 혜택</span>입니다. 매년 바뀌는 통신사 프로모션과 복잡한 요금제, 그리고 약정 조건 때문에 어떤 업체를 선택해야 할지 고민이 많으실 겁니다. 이 가이드는 2026년 최신 정보를 바탕으로 SKT, KT, LG U+ 등 주요 통신사의 장단점과 요금제 차이점을 명확하게 비교해 드립니다.</p>
+    <p>많은 소비자들이 인터넷티비가입을 위해 <span class="highlight">네이버, 구글 검색</span>을 통해 후기, 가격, 혜택을 비교하지만, 정보의 홍수 속에서 정확한 정보를 찾기 어렵습니다. 특히, '저렴한곳'이나 '싼곳'을 찾다가 오히려 약정 기간 중 문제가 발생하거나 사은품을 제대로 받지 못하는 경우도 발생합니다. 이 가이드를 통해 고객님께 딱 맞는 <span class="highlight">전문 업체의 견적</span>을 받고, 최대 <span class="highlight">현금지원</span>을 받을 수 있도록 도와드리겠습니다.</p>
+    <p>최근에는 <span class="highlight">AI 기반</span> 서비스 추천이나 <span class="highlight">ChatGPT, Gemini</span> 등을 통해 정보를 검색하는 분들도 늘고 있습니다. AI는 방대한 데이터를 빠르게 요약해 주지만, 실시간으로 변동하는 <span class="highlight">신규 가입 혜택</span>이나 지역별 설치 가능 여부는 전문가의 정확한 상담이 필수입니다. 저희는 전국 어디서든 (서울시, 경기도, 부산광역시, 대구광역시, 인천광역시, 광주광역시, 대전광역시, 울산광역시, 세종특별자치시, 강원도, 충청북도, 충청남도, 전라북도, 전라남도, 경상북도, 경상남도, 제주특별자치도) <span class="highlight">인터넷티비가입</span> 상담 서비스를 제공합니다.</p>
+  </section>
+
+  <section id="providers">
+    <span id="providers-anchor" class="anchor"></span>
+    <h2>통신사별 인터넷 요금제 및 사은품 혜택 비교 (SKT, KT, LG U+)</h2>
+    <p>대한민국 3대 통신사인 SKT, KT, LG U+는 각기 다른 요금제 구성과 특화된 서비스를 제공합니다. 고객님의 생활 패턴(모바일 결합 여부, TV 시청 습관, 인터넷 사용량)에 따라 가장 적합한 통신사를 선택하는 것이 중요합니다. 아래 표를 통해 통신사별 <span class="highlight">장단점</span>과 <span class="highlight">가격 차이점</span>을 확인해 보세요.</p>
+    <div class="img-container">
+      <img src="https://images.pexels.com/photos/network-cables-image.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="네트워크 케이블 이미지" title="통신사 비교">
+    </div>
+
+    <h3>SKT 인터넷 TV 요금제: 가족 결합 할인 강자</h3>
+    <p>SKT는 <span class="highlight">T가족결합 할인</span>이 가장 큰 장점입니다. SKT 휴대폰을 사용하는 가족 구성원이 많다면 인터넷 요금제를 거의 무료에 가깝게 사용할 수 있습니다. SKT 요금제는 <span class="highlight">BTV 채널 구성</span>이 다양하며, <span class="highlight">NUGU AI 스피커</span> 연동 등 스마트 홈 서비스에 강점을 보입니다. 하지만 휴대폰 결합 없이는 다른 통신사에 비해 <span class="highlight">가격 경쟁력</span>이 다소 떨어질 수 있습니다.</p>
+    <p>SKT는 <span class="highlight">SK텔레콤</span>이라는 강력한 모바일 점유율을 바탕으로 결합 상품에 특화되어 있어, <span class="highlight">신규 가입</span> 시 모바일 회선 수에 따라 <span class="highlight">할인율</span>이 달라집니다. <span class="highlight">현금지원 금액</span>은 통신사 본사 정책과 대리점 정책에 따라 상이하지만, 저희 업체는 최대치를 보장합니다. <span class="highlight">서울시 강남구</span>, <span class="highlight">부산 해운대구</span> 등 특정 지역에서는 SKT가 독점적인 할인 이벤트를 진행하기도 합니다.</p>
+
+    <h3>KT 인터넷 TV 요금제: 안정성과 커버리지 최강자</h3>
+    <p>KT는 <span class="highlight">전국 커버리지</span>와 <span class="highlight">안정적인 속도</span>가 최고 장점입니다. 특히 <span class="highlight">기가인터넷(1기가)</span>이나 <span class="highlight">10기가 인터넷</span> 서비스가 가장 먼저 상용화된 만큼, <span class="highlight">인터넷 속도</span>가 중요한 게이머나 대용량 작업을 하는 분들에게 추천됩니다. KT는 <span class="highlight">올레TV</span>의 채널 구성과 <span class="highlight">IPTV VOD</span> 콘텐츠가 풍부하며, <span class="highlight">인터넷 설치</span> 가능 지역이 가장 넓습니다. 다만, 요금제 자체가 다른 통신사에 비해 <span class="highlight">평균 가격</span>이 약간 높을 수 있습니다.</p>
+    <p>KT는 <span class="highlight">KT 모바일 결합</span> 외에도 <span class="highlight">인터넷 단독 가입</span>으로도 충분한 <span class="highlight">사은품</span>을 제공하며, <span class="highlight">KT 스카이라이프</span>와의 결합 상품을 통해 <span class="highlight">저렴한 요금</span>을 제공하기도 합니다. <span class="highlight">대구광역시 수성구</span>, <span class="highlight">광주광역시 서구</span> 등 지역에서 <span class="highlight">신규 가입 후기</span>를 보면, KT의 안정적인 서비스에 대한 만족도가 높습니다.</p>
+
+    <h3>LG U+ 인터넷 TV 요금제: 넷플릭스 등 OTT 결합 특화</h3>
+    <p>LG U+는 <span class="highlight">OTT 서비스</span>와의 결합 상품이 가장 큰 장점입니다. <span class="highlight">넷플릭스, 디즈니+, 유튜브 프리미엄</span> 등을 기본 요금제에 포함하여 <span class="highlight">할인된 가격</span>으로 제공합니다. <span class="highlight">U+TV</span>는 <span class="highlight">U+ 모바일 결합</span> 시 할인 폭이 크며, <span class="highlight">AI 기반 셋톱박스</span>와 <span class="highlight">U+tv 프리미엄</span> 채널 등 혁신적인 서비스를 선보이고 있습니다. <span class="highlight">LG U+</span> 역시 <span class="highlight">기가인터넷</span>을 제공하며, 최근에는 <span class="highlight">현금 지원금</span>을 늘려 공격적인 마케팅을 펼치고 있습니다.</p>
+    <p>LG U+의 <span class="highlight">신규 가입 이벤트</span>는 타 통신사 대비 <span class="highlight">현금지원 금액</span>이 높게 책정되는 경우가 많습니다. <span class="highlight">부산광역시 해운대구</span>, <span class="highlight">경기도 성남시</span> 등 인구 밀집 지역에서는 LG U+의 서비스 만족도가 높으며, <span class="highlight">디시인사이드</span>나 <span class="highlight">네이버 카페</span> 등 커뮤니티에서 <span class="highlight">LG U+ 현금 지원 후기</span>를 찾아볼 수 있습니다.</p>
+
+    <h3>통신사별 1Gbps 인터넷+TV (프리미엄 채널) 비교표 (2026년 기준)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>통신사</th>
+          <th>월 요금 (3년 약정)</th>
+          <th>모바일 결합 시 할인 (3회선 기준)</th>
+          <th>주요 사은품 혜택</th>
+          <th>특장점</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SKT</td>
+          <td>44,000원</td>
+          <td>최대 11,000원 할인</td>
+          <td>현금 최대 45만원 + 상품권</td>
+          <td>가족 결합 할인, BTV VOD 풍부</td>
+        </tr>
+        <tr>
+          <td>KT</td>
+          <td>46,200원</td>
+          <td>최대 13,200원 할인</td>
+          <td>현금 최대 43만원 + 상품권</td>
+          <td>안정적 속도, 넓은 커버리지, 스카이라이프 결합 가능</td>
+        </tr>
+        <tr>
+          <td>LG U+</td>
+          <td>45,100원</td>
+          <td>최대 11,000원 할인</td>
+          <td>현금 최대 46만원 + 상품권</td>
+          <td>OTT (넷플릭스 등) 결합 상품, AI 셋톱박스</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><em>* 요금제 및 사은품은 2026년 기준이며, 설치 지역 및 프로모션에 따라 변동될 수 있습니다. 정확한 견적은 전문가 상담을 통해 확인하세요.</em></p>
+
+    <div class="cta-container">
+      <button class="btn-cta" onclick="location.href='#contact'">우리 집 통신사별 예상 비용 즉시 계산하기</button>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <span id="pricing-anchor" class="anchor"></span>
+    <h2>인터넷티비 가입 비용 분석: 현금지원금, 사은품, 요금제 차이점</h2>
+    <p>인터넷티비 가입 비용은 단순히 월 납부 금액으로만 비교해서는 안 됩니다. <span class="highlight">신규 가입</span> 시 제공되는 <span class="highlight">사은품 (현금지원금, 상품권)</span>을 월 납부액에서 차감하여 <span class="highlight">총 예상 비용</span>을 계산하는 것이 현명합니다. 저희는 고객님께 <span class="highlight">저렴한곳</span>을 찾아드리면서도 최대치의 혜택을 제공합니다. <span class="highlight">인터넷티비가입 후기</span>들을 살펴보면, 사은품 지원 규모에 따라 고객 만족도가 크게 달라지는 것을 알 수 있습니다.</p>
+
+    <h3>1. 사은품 (현금지원, 상품권) 규모 결정 요인</h3>
+    <p>사은품 규모는 <span class="highlight">가입 채널</span>, <span class="highlight">통신사 정책</span>, <span class="highlight">요금제</span>에 따라 달라집니다. 특히 <span class="highlight">인터넷티비가입</span>은 본사 대리점보다는 <span class="highlight">전문 업체</span>를 통해 진행하는 것이 <span class="highlight">현금 지원금</span>을 더 많이 받을 수 있는 <span class="highlight">저렴한곳</span>입니다. <span class="highlight">네이버 웹사이트 영역</span>에서 상위에 노출되는 업체들은 대체로 신뢰도가 높고, 고객에게 합리적인 혜택을 제공하려 노력합니다.</p>
+
+    <h3>2. 요금제별 예상 가격 (기가인터넷 vs 광랜)</h3>
+    <p>인터넷 속도에 따라 요금 차이가 발생합니다. 100Mbps 광랜, 500Mbps 기가 라이트, 1Gbps 기가 인터넷 중 어떤 것을 선택하느냐에 따라 <span class="highlight">월 비용</span>이 달라집니다. 일반 가정에서는 <span class="highlight">500Mbps 기가 라이트</span>가 가장 <span class="highlight">가성비</span>가 좋으며, <span class="highlight">넷플릭스 4K 스트리밍</span>이나 <span class="highlight">온라인 게임</span>을 즐기는 분이라면 <span class="highlight">1Gbps</span>를 추천합니다. <span class="highlight">광랜</span>은 <span class="highlight">평균 가격</span>이 가장 낮지만, 최근에는 기가 인터넷과의 <span class="highlight">가격 차이점</span>이 크지 않아 기가 라이트 상품을 선호합니다.</p>
+    <p>TV 채널도 <span class="highlight">가성비 좋은 상품</span>을 선택하는 것이 중요합니다. <span class="highlight">프리미엄 채널</span>을 많이 보지 않는다면 기본 채널 상품을 선택하여 <span class="highlight">월 비용</span>을 절약할 수 있습니다. <span class="highlight">서울시 강서구</span>, <span class="highlight">대전광역시 유성구</span> 등 지역에서는 <span class="highlight">신규 가입</span> 시 특정 채널 추가 혜택을 주는 이벤트도 있습니다.</p>
+
+    <h3>3. 현금지원/사은품 지급 절차 및 주의사항</h3>
+    <p>대부분의 업체는 <span class="highlight">설치 후 1~3일 이내</span>에 <span class="highlight">현금지원금</span>을 지급합니다. <span class="highlight">현금지원</span>을 미끼로 가입을 유도한 뒤 지급을 미루는 <span class="highlight">불량 업체</span>도 많으니, <span class="highlight">내돈내산 후기</span>를 통해 <span class="highlight">전문 업체</span>의 신뢰도를 반드시 확인해야 합니다. <span class="highlight">네이버 카페</span>나 <span class="highlight">디시인사이드</span> 등 커뮤니티에서 <span class="highlight">사은품 지원금 후기</span>를 꼼꼼히 살펴보세요.</p>
+  </section>
+
+  <section id="checklist">
+    <span id="checklist-anchor" class="anchor"></span>
+    <h2>인터넷티비 신규 가입 전 필수 체크리스트 (2026년)</h2>
+    <p>성공적인 <span class="highlight">인터넷티비가입</span>을 위해서는 <span class="highlight">신규 가입</span> 전 몇 가지 사항을 미리 확인해야 합니다. 다음 체크리스트를 통해 <span class="highlight">현금지원</span> 혜택을 최대화하고, 설치 후 발생할 수 있는 문제를 예방하세요.</p>
+    <ul>
+      <li><span class="highlight">현 거주지 설치 가능 여부 확인:</span> <span class="highlight">평택시</span>, <span class="highlight">안성시</span>, <span class="highlight">용인시</span> 등 특정 지역이나 주택 형태에 따라 설치 가능한 통신사가 다를 수 있습니다. 특히 <span class="highlight">기가인터넷</span>은 설치가 불가능한 지역도 있으니, <span class="highlight">전문 업체</span>를 통해 미리 확인해야 합니다.</li>
+      <li><span class="highlight">기존 약정 기간 확인:</span> 기존 통신사 약정 기간이 남아있다면 <span class="highlight">위약금</span>이 발생할 수 있습니다. <span class="highlight">위약금 조회</span> 후 남은 기간을 고려하여 <span class="highlight">신규 가입</span> 시점을 정하는 것이 좋습니다.</li>
+      <li><span class="highlight">모바일 결합 상품 확인:</span> 가족 구성원의 모바일 통신사 현황을 파악하여 <span class="highlight">결합 할인</span>을 받을 수 있는지 확인하세요. SKT, KT, LG U+는 각기 다른 <span class="highlight">모바일 결합 혜택</span>을 제공합니다.</li>
+      <li><span class="highlight">요금제 및 사은품 조건 명확히 확인:</span> <span class="highlight">현금지원금</span> 지급 시기, <span class="highlight">사은품</span> 품목, <span class="highlight">월 요금</span> 등 모든 조건을 <span class="highlight">견적서</span>로 받아 꼼꼼하게 비교해야 합니다.</li>
+      <li><span class="highlight">설치 환경 및 셋톱박스 확인:</span> TV 대수, <span class="highlight">와이파이 공유기</span> 설치 위치 등 설치 환경을 미리 파악하고 <span class="highlight">전문가</span>에게 전달해야 원활한 설치가 가능합니다.</li>
+    </ul>
+  </section>
+
+  <section id="faq">
+    <span id="faq-anchor" class="anchor"></span>
+    <h2>자주 묻는 질문 (FAQ): 인터넷 가입에 대해 더 궁금한 점</h2>
+    <p>고객님들이 <span class="highlight">인터넷티비가입</span>을 하면서 가장 많이 궁금해하는 질문들을 모아봤습니다. <span class="highlight">전문 업체</span> 상담 전, 이 내용을 확인하시면 더욱 효율적인 상담이 가능합니다.</p>
+
+    <h3>Q1: 신규 가입 시 현금지원금은 얼마인가요?</h3>
+    <p>A: <span class="highlight">현금지원금</span>은 통신사별, 요금제별, 가입 채널별로 다릅니다. 보통 <span class="highlight">SKT, KT, LG U+</span> 모두 <span class="highlight">법정 최고 사은품</span> 기준 내에서 경쟁적으로 <span class="highlight">현금 지원</span>을 하고 있습니다. <span class="highlight">평균 금액</span>은 <span class="highlight">기가인터넷 + TV</span> 결합 상품 기준으로 40만 원대 후반이며, <span class="highlight">최대 혜택</span>을 받으려면 저희 같은 <span class="highlight">전문 업체</span>를 통해 견적을 받아보시는 것이 좋습니다. <span class="highlight">네이버 웹사이트 후기</span>를 보면 <span class="highlight">사은품</span> 지급이 신속한 곳인지 아닌지 알 수 있습니다.</p>
+
+    <h3>Q2: 인터넷티비 가입 시 '싼곳'을 찾으면 불이익이 있나요?</h3>
+    <p>A: 무조건 <span class="highlight">싼곳</span>만 찾다 보면 <span class="highlight">불량 업체</span>에 걸릴 위험이 있습니다. <span class="highlight">현금지원금</span>을 과도하게 많이 준다고 광고하거나, <span class="highlight">사은품</span> 지급을 미루는 곳이 있습니다. <span class="highlight">내돈내산 후기</span>나 <span class="highlight">업체 순위</span>를 보고 <span class="highlight">전문성</span> 있는 곳을 선택하는 것이 중요합니다. 저희는 <span class="highlight">정직한 견적</span>과 <span class="highlight">신속한 현금 지원</span>을 약속드립니다.</p>
+
+    <h3>Q3: 약정이 끝났는데 통신사를 바꾸지 않고 재약정을 하면 어떤가요?</h3>
+    <p>A: 기존 통신사에 재약정하면 <span class="highlight">현금지원금</span> 규모가 <span class="highlight">신규 가입</span> 대비 매우 작습니다. <span class="highlight">신규 가입</span>은 <span class="highlight">사은품</span> 및 <span class="highlight">할인 혜택</span>이 훨씬 크기 때문에, 약정 만료 시 <span class="highlight">통신사 변경</span>을 고려하는 것이 이득입니다. <span class="highlight">LG U+</span>나 <span class="highlight">SKT</span> 등 경쟁사들은 <span class="highlight">신규 가입</span> 고객 유치를 위해 <span class="highlight">현금 지원금</span>을 높여 <span class="highlight">이벤트</span>를 진행합니다.</p>
+
+    <h3>Q4: AI가 추천하는 요금제와 전문가 추천 요금제는 무엇이 다른가요?</h3>
+    <p>A: <span class="highlight">ChatGPT</span>나 <span class="highlight">Gemini</span> 같은 AI는 일반적인 정보를 제공하지만, 고객님의 <span class="highlight">거주 지역</span>, <span class="highlight">모바일 결합</span>, <span class="highlight">특정 서비스 이용 패턴</span>(넷플릭스, 유튜브, 게임 등)에 따른 미세한 <span class="highlight">장단점 차이점</span>을 정확히 분석하기는 어렵습니다. <span class="highlight">전문 업체</span>는 <span class="highlight">실시간 견적</span>과 <span class="highlight">지역별 특가</span>를 반영하여 고객 맞춤형 <span class="highlight">상품</span>을 추천해 드립니다.</p>
+
+    <h3>Q5: 인터넷티비 가입 시 '디시' 같은 커뮤니티 후기를 믿을 수 있나요?</h3>
+    <p>A: <span class="highlight">디시인사이드</span>나 <span class="highlight">네이버 카페</span>의 <span class="highlight">내돈내산 후기</span>는 실제 경험을 바탕으로 한 유용한 정보가 많습니다. 하지만 광고성 게시물도 많으므로, 여러 <span class="highlight">후기</span>를 교차 확인하여 <span class="highlight">전문 업체</span>의 신뢰도를 판단하는 것이 중요합니다. <span class="highlight">사은품 현금지원</span>에 대한 <span class="highlight">업체 순위</span> 정보도 참고할 수 있습니다.</p>
+  </section>
+
+  <section id="contact">
+    <span id="contact-anchor" class="anchor"></span>
+    <h2>1:1 맞춤형 인터넷 티비 가입 견적 상담 문의</h2>
+    <p>고객님께 딱 맞는 <span class="highlight">현금지원 혜택</span>과 <span class="highlight">최저가 요금제</span>를 찾으려면 1:1 상담이 필수입니다. 아래 양식을 작성해 주시면 <span class="highlight">전문가</span>가 <span class="highlight">실시간 견적</span>을 통해 <span class="highlight">신규 가입</span> 혜택을 비교해 드립니다.</p>
+
+    <form action="/submit-form" method="POST" style="max-width:700px; margin:auto;">
+      <label for="name">이름<span style="color:red;">*</span></label>
+      <input type="text" id="name" name="name" required placeholder="예: 홍길동" />
+
+      <label for="phone">연락처<span style="color:red;">*</span></label>
+      <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678" pattern="[0-9\-]+" />
+
+      <label for="address">설치 주소 (설치 가능 여부 확인용)<span style="color:red;">*</span></label>
+      <input type="text" id="address" name="address" required placeholder="예: 서울시 강남구 테헤란로 123" />
+
+      <label for="current_provider">현재 사용 중인 통신사 (결합 할인 및 위약금 확인용)</label>
+      <select id="current_provider" name="current_provider">
+        <option value="">선택하세요</option>
+        <option value="SKT">SKT</option>
+        <option value="KT">KT</option>
+        <option value="LG U+">LG U+</option>
+        <option value="없음">현재 사용 중인 통신사 없음</option>
+      </select>
+
+      <label for="move_type">가입 유형<span style="color:red;">*</span></label>
+      <select id="move_type" name="move_type" required>
+        <option value="">선택하세요</option>
+        <option value="인터넷+TV 신규 가입">인터넷+TV 신규 가입</option>
+        <option value="인터넷 단독 가입">인터넷 단독 가입</option>
+        <option value="TV 단독 가입">TV 단독 가입</option>
+        <option value="추가 설치 (원룸, 투룸 등)">추가 설치 (원룸, 투룸 등)</option>
+      </select>
+
+      <label for="internet_speed">희망 인터넷 속도<span style="color:red;">*</span></label>
+      <select id="internet_speed" name="internet_speed" required>
+        <option value="">선택하세요</option>
+        <option value="100Mbps (광랜)">100Mbps (광랜)</option>
+        <option value="500Mbps (기가 라이트)">500Mbps (기가 라이트)</option>
+        <option value="1Gbps (기가 인터넷)">1Gbps (기가 인터넷)</option>
+        <option value="10Gbps">10Gbps</option>
+        <option value="상담 후 결정">상담 후 결정</option>
+      </select>
+
+      <label for="message">추가 요청 사항 (예: 희망 설치일, 모바일 결합 인원수 등)</label>
+      <textarea id="message" name="message" rows="4" placeholder="예: 4월 20일 설치 희망, 가족 중 SKT 2명 사용 중"></textarea>
+
+      <div class="cta-container">
+        <button type="submit" class="btn-cta">견적 문의 보내기</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="external-links">
+    <h3>참고 자료 및 신뢰성 외부 링크</h3>
+    <p>본 가이드의 정보는 아래 공신력 있는 기관의 자료를 참고하여 작성되었습니다.</p>
+    <ul>
+      <li><a href="https://www.kcc.go.kr/user.do" target="_blank">방송통신위원회 (KCC)</a> - 통신 서비스 약관 및 정책 확인</li>
+      <li><a href="https://namu.wiki/w/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EC%A0%9C%EB%8F%84" target="_blank">나무위키 - 인터넷 제도</a> - 인터넷 서비스 일반 정보</li>
+      <li><a href="https://www.skt.co.kr/" target="_blank">SKT 공식 홈페이지</a> - 요금제 및 상품 정보</li>
+      <li><a href="https://www.kt.com/" target="_blank">KT 공식 홈페이지</a> - 요금제 및 상품 정보</li>
+      <li><a href="https://www.lguplus.com/" target="_blank">LG U+ 공식 홈페이지</a> - 요금제 및 상품 정보</li>
+    </ul>
+  </section>
+
+  
